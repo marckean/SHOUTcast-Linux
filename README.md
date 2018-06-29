@@ -10,9 +10,9 @@ Before we can push an image to the registry we need to login. This can be done u
 
 
 ```
-docker login -u registryuser -p 498242jf04fijf80j4fm023j9 http://account.azurecr.io
+docker login -u <username> -p <password> http://<registryname>-on.azurecr.io
 ```
-Change the parameters to suite your environment.
+Change the parameters above to suite your environment.
 
 From this moment on, all commands that interact with the registry are authenticated. If you are using these commands as part of your build scripts it is wise to also use the logout command, so the credentials are never left open on the machine.
 
@@ -34,9 +34,25 @@ docker push marcregistry.azurecr.io/shoutcast-linux:latest
 
 az group create --name 'SHOUTCAST-Linux' --location australiaeast
 
-az container create --resource-group 'SHOUTCAST-Linux' --name shoutcastlinux --image marcregistry.azurecr.io/shoutcast-linux:latest --registry-password Qd3LUE743AT78tiekt0=Hfwzo3oneTPv --restart-policy OnFailure --ip-address Public --cpu 1 --memory 1 --ports 8000 8001 --location southeastasia --verbose
+az container create --resource-group 'SHOUTCAST-Linux' --name shoutcastlinux --image marcregistry.azurecr.io/shoutcast-linux:latest --registry-password Qd3LUE743AT78tiekt0=Hfwzo3oneTPv --restart-policy OnFailure --ip-address Public --cpu 1 --memory 1 --ports 8000 8001 --location australiaeast --verbose
 
 az container show --resource-group 'SHOUTCAST-Linux' --name shoutcastlinux
 
 az container logs --resource-group 'SHOUTCAST-Linux' --name shoutcastlinux
 ```
+## Run applications in Azure Container Service (AKS)
+From here https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
+
+### Create Kubernetes cluster
+`az aks create --resource-group <ResourceGroupName> --name <AKS-Name> --node-count 2 --generate-ssh-keys --location AustraliaEast`
+
+### Start Kubernetes dashboard
+`az aks browse --resource-group <ResourceGroupName> --name <AKS-Name>`
+
+### Connect with kubectl
+`az aks get-credentials --resource-group=<ResourceGroupName> --name=<AKS-Name>`
+
+### Configure Kubernetes to use your ACR 
+`kubectl create secret docker-registry aks-secret20180105 --docker-server <registryname>.azurecr.io --docker-email=<email> --docker-username=<username> --docker-password <password>`
+
+
