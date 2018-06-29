@@ -1,0 +1,36 @@
+# shoutcastwin.yaml
+# no tabs in a YAML file
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+ name: shoutcastlinuxpod
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shoutcastlinuxpod
+    spec:
+      containers:
+      - name: shoutcastlinux
+        image: marcregistry.azurecr.io/shoutcastlinux:latest
+        ports:
+        - containerPort: 8000
+        - containerPort: 8001
+      imagePullSecrets:
+      - name: aks-secret20180105
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoutcastlinuxlb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000
+    name: first
+  - port: 8001
+    name: second
+  selector:
+    app: shoutcastlinuxpod
