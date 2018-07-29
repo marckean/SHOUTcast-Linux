@@ -128,6 +128,14 @@ Once your container has been built and is in the container registry, you are rea
 ### Run applications in Azure Container Service (AKS)
 From here https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
 
+### Configure Kubernetes to use your ACR 
+kubectl create secret docker-registry aks-secret20180105 --docker-server marcregistry.azurecr.io --docker-email=marc@marckean.com --docker-username=marcregistry --docker-password Qd3LUE743AT78tiekt0=Hfwzo3oneTPv
+
+### Check the Azure Container Registry login server
+az acr list --resource-group ContainerRegistry --query "[].{acrLoginServer:loginServer}" --output table
+
+
+
 ### Create Kubernetes cluster
 
 `az aks create --resource-group <ResourceGroupName> --name <AKS-Name> --node-count 2 --generate-ssh-keys --location AustraliaEast`
