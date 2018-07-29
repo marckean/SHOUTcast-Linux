@@ -22,27 +22,27 @@ You can bring up the VS Code **Integrated Terminal** from the View menu and run 
 
 ### Docker Build
 
-    docker build -t marcregistry.azurecr.io/shoutcast-linux:latest .
+`docker build -t marcregistry.azurecr.io/shoutcast-linux:latest .`
 
 ### See all running containers on a host
 
-    docker ps [-all]
+`docker ps [-all]`
 
 ### See all containers that were previously run but that have exited and can be still committed to a new image layer
 
-    docker ps -a
+`docker ps -a`
 
 ### Docker commit commits changes in a container that has exited and save it to a new image
 
-    docker commit
+`docker commit`
 
 ### Docker stop a container
 
-    docker stop <container-name>
+`docker stop <container-name>`
 
 ### Search the docker hub for container images:
 
-    docker search microsoft
+`docker search microsoft`
 
 ### Pull an image down from the Docker Hub 
 
@@ -54,9 +54,9 @@ docker pull marcregistry.azurecr.io/windowsservercore
 
 ### You can run a command in an existing container ID 002
 
-    docker exec -it 002 cmd
+`docker exec -it 002 cmd`
 
-###You can run a command in an existing container ID 002, to get network information, IP address e.g.
+### You can run a command in an existing container ID 002, to get network information, IP address e.g.
 
 ```
 docker inspect 002
@@ -67,28 +67,27 @@ docker ps -a
 
 ### Creating a new container image with no image name
 
-    docker commit
+ `docker commit`
 
 ### You can give a name to a container image by using the docker tag command
 
-    docker tag <IMAGE ID> mycontainerimage
+`docker tag <IMAGE ID> mycontainerimage`
 
 ### To list all container images
 
-    docker images
+`docker images`
 
 ### To clean up docker containers
 
-```
-docker rm 8b f2 002 b1
-docker rm $(docker ps -a -q)
-```
+`docker rm 8b f2 002 b1`
+
+`docker rm $(docker ps -a -q)`
 
 ### Logging in to the Docker Registry
 
 Before we can push an image to the registry we need to login. This can be done using the following command-line
 
-    docker login -u <username> -p <password> http://<registryname>-on.azurecr.io
+`docker login -u <username> -p <password> http://<registryname>-on.azurecr.io`
 
 Change the parameters above to suite your environment.
 
@@ -134,12 +133,15 @@ From here https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-
 `az aks create --resource-group <ResourceGroupName> --name <AKS-Name> --node-count 2 --generate-ssh-keys --location AustraliaEast`
 
 ### Start Kubernetes dashboard
+
 `az aks browse --resource-group <ResourceGroupName> --name <AKS-Name>`
 
 ### Connect with kubectl
+
 `az aks get-credentials --resource-group=<ResourceGroupName> --name=<AKS-Name>`
 
-### Configure Kubernetes to use your ACR 
+### Configure Kubernetes to use your ACR
+
 `kubectl create secret docker-registry aks-secret20180105 --docker-server <registryname>.azurecr.io --docker-email=<email> --docker-username=<username> --docker-password <password>`
 
 
