@@ -8,7 +8,7 @@ Install Docker for Windows from [here](https://docs.docker.com/docker-for-window
 
 ## Container Registries
 
-WHen working with containers, you will need a container registry as mandatory to store all your containers so that they are accessible by virtually everything, ACI, AKS etc etc. By default the docker tools use the Docker registry which can be found at http://hub.docker.com. However you can use the Azure Container Registry instead. [Create a container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal).
+When working with containers, you will need a container registry as mandatory to store all your containers so that they are accessible by virtually everything, ACI, AKS etc etc. By default the docker tools use the Docker registry which can be found at http://hub.docker.com. However you can use the Azure Container Registry instead. [Create a container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal).
 
 ## VS Code extension & setup
 
@@ -128,8 +128,10 @@ Once your container has been built and is in the container registry, you are rea
 ### Run applications in Azure Container Service (AKS)
 From here https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
 
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.11.0/bin/windows/amd64/kubectl.exe
+
 ### Configure Kubernetes to use your ACR 
-kubectl create secret docker-registry aks-secret20180105 --docker-server marcregistry.azurecr.io --docker-email=marc@marckean.com --docker-username=marcregistry --docker-password Qd3LUE743AT78tiekt0=Hfwzo3oneTPv
+kubectl create secret docker-registry aks-secret20180105 --docker-server marcregistry.azurecr.io --docker-email=`email-address` --docker-username=`username` --docker-password `password`
 
 ### Check the Azure Container Registry login server
 az acr list --resource-group ContainerRegistry --query "[].{acrLoginServer:loginServer}" --output table
