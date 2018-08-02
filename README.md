@@ -125,18 +125,32 @@ Once your container has been built and is in the container registry, you are rea
 
 - **Volume** | a local disk directory or a network disk
 
-### Run applications in Azure Container Service (AKS)
+## Run applications in Azure Container Service (AKS)
 From here https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-application
 
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.11.0/bin/windows/amd64/kubectl.exe
+[Install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
-### Configure Kubernetes to use your ACR 
-kubectl create secret docker-registry aks-secret20180105 --docker-server marcregistry.azurecr.io --docker-email=`email-address` --docker-username=`username` --docker-password `password`
+### Create a Resource Group
+
+`az group create --name <ResourceGroupName> --location AustraliaEast`
+
+### Create Kubernetes cluster
+
+`az aks create --resource-group <ResourceGroupName> --name <AKSName> --node-count 2 --generate-ssh-keys --location AustraliaEast`
+
+This take a while to complete.
+
+### Connect with kubectl
+
+`az aks get-credentials --resource-group=<ResourceGroupName> --name=<AKSName>`
+
+### Configure Kubernetes to use your ACR
+
+`kubectl create secret docker-registry <SECRET_NAME> --docker-server <REGISTRY_NAME>.azurecr.io --docker-email=<YOUR_EMAIL> --docker-username=<USERNAME> --docker-password <PASSWORD>`
 
 ### Check the Azure Container Registry login server
-az acr list --resource-group ContainerRegistry --query "[].{acrLoginServer:loginServer}" --output table
 
-
+`az acr list --resource-group ContainerRegistry --query "[].{acrLoginServer:loginServer}" --output table`
 
 ### Create Kubernetes cluster
 
