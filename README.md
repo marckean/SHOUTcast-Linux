@@ -18,7 +18,7 @@ The Docker extension in VS Code takes care of all the manual Docker command work
 
 With the Docker extension, you can do practically all your common Docker image commands using VS Code.
 
-<p style="text-align:center;"><img src="VScode-DockerExtension.png" width="450" alt="VS Code Docker Extension"></p>
+<p style="text-align:center"><img src="VScode-DockerExtension.png" width="450" alt="VS Code Docker Extension"></p>
 
 ## Instructions
 
@@ -43,7 +43,7 @@ With the Docker extension, you can do practically all your common Docker image c
 - Using a popular media player, like Winamp, in Winamp hit **CTRL-L**, open the stream **http://IP-AddressOfContainer**
     - Or with your favourite browser, simply navigate to the IP address of the container. Then click on listen.
 
-<p style="text-align:center;"><img src="2018-10-06_0736.png" width="650" alt="SHOUTcast Page" class="center"></p>
+<p style="text-align:center"><img src="2018-10-06_0736.png" width="650" alt="SHOUTcast Page" class="center"></p>
 
 # Manual Commands
 
