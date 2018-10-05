@@ -16,7 +16,36 @@ You will need the Azure based VS Code extensions as well as the Docker extension
 
 The Docker extension in VS Code takes care of all the manual Docker command work. Bring up the **VS Code Command Palette (F1)** integration for the most common Docker commands (for example **docker build**, **docker push**, etc.).
 
-## Manual Commands
+With the Docker extension, you can do practically all your common Docker image commands using VS Code.
+
+![VScode-DockerExtension.png](VScode-DockerExtension.png)
+
+## Instructions
+
+- Clone this repo **git clone https://github.com/marckean/SHOUTcast-Linux.git**
+- Open the folder in VS Code
+- Build the image. In VS Code, hit **F1**, then choose **Docker: Build Image**, then tag it with **marcregistry.azurecr.io/shoutcast-linux:latest**.
+- Then simply push the image to the Azure Container registry
+- Create an Azure Resource Group
+
+    `az group create --name 'SHOUTCAST-Linux' --location australiaeast`
+
+- Create the container in Azure
+    
+    `az container create --resource-group 'SHOUTCAST-Linux' --name 'shoutcastlinux' --image marcregistry.azurecr.io/shoutcast-linux:latest --registry-username marcregistry --registry-password 'PaSsWoRd' --restart-policy OnFailure --ip-address Public --cpu 1 --memory 1 --ports 80 81 --location australiaeast --verbose`
+
+- Show the container in Azure
+
+    `az container show --resource-group 'SHOUTCAST-Linux' --name 'shoutcastlinux' --out table`
+
+### Test
+
+- Using a popular media player, like Winamp, in Winamp hit **CTRL-L**, open the stream **http://IP-AddressOfContainer**
+    - Or with your favourite browser, simply navigate to the IP address of the container. Then click on listen.
+
+![SHOUTcastPage](2018-10-06_0736.png)
+
+# Manual Commands
 
 You can bring up the VS Code **Integrated Terminal** from the View menu and run Docker commands locally if you wish.
 
@@ -93,22 +122,6 @@ Change the parameters above to suite your environment.
 
 From this moment on, all commands that interact with the registry are authenticated. If you are using these commands as part of your build scripts it is wise to also use the logout command, so the credentials are never left open on the machine.
 
-## Container Build and Push to Container Registry
-
-```
-git clone https://github.com/marckean/SHOUTcast-Linux.git
-
-cd SHOUTcast-Linux
-
-docker build -t shoutcast-linux:latest .
-
-docker tag shoutcast-linux marcregistry.azurecr.io/shoutcast-linux:latest
-
-docker push marcregistry.azurecr.io/shoutcast-linux:latest
-
-
-az group create --name 'SHOUTCAST-Linux' --location australiaeast
-```
 # Kubernetes
 
 Once your container has been built and is in the container registry, you are ready to deploy it using Kubernetes.
