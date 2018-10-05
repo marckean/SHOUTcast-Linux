@@ -22,10 +22,16 @@ With the Docker extension, you can do practically all your common Docker image c
 
 ## Instructions
 
-- Clone this repo **git clone https://github.com/marckean/SHOUTcast-Linux.git**
+- Clone this repo:
+
+    `git clone https://github.com/marckean/SHOUTcast-Linux.git`
+
 - Open the folder in VS Code
+
 - Build the image. In VS Code, hit **F1**, then choose **Docker: Build Image**, then tag it with **marcregistry.azurecr.io/shoutcast-linux:latest**.
-- Then simply push the image to the Azure Container registry
+
+- Then simply push the image to the Azure Container registry - using the Docker extension in VS Code (refer to screenshot above)
+
 - Create an Azure Resource Group
 
     `az group create --name 'SHOUTCAST-Linux' --location australiaeast`
